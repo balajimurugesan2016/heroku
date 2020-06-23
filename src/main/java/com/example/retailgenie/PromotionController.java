@@ -23,6 +23,15 @@ return "testapp";
 
 }
 
+@GetMapping("/getpromotions")
+public String promotions(){
+
+
+return "promotions";
+
+
+}
+
 
 
 
