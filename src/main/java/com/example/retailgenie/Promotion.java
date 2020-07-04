@@ -22,6 +22,9 @@ class Promotion {
     private Date startfrom;
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date untilwhen;
+    private String productname;
+    private String aisle;
+    private String shelf;
 
     public  Promotion(){
 
@@ -93,5 +96,32 @@ class Promotion {
     public void setUntilwhen(Date untilwhen) {
         this.untilwhen = untilwhen;
     }
+
+    public String getProductName(){
+        return productname;
+    }
+
+    public void setProductName(String productname){
+
+        this.productname = productname;
+    }
+    public String getAisle(){
+        return aisle;
+    }
+
+    public void setAisle(String aisle){
+
+        this.aisle = aisle;
+    }
+
+    public String getShelf(){
+
+        return shelf;
+    }
+
+    public void setShelf(String shelf){
+        this.shelf = shelf;
+    }
+
 
 }
