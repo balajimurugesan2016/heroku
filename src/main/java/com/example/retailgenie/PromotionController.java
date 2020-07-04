@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -65,7 +66,7 @@ public String addPromotion(@RequestBody Promotion promotion) {
 
 repository.save(promotion);
 
-return "test okay";
+return "created";
     
 }
 
@@ -76,6 +77,24 @@ public String deletePromotion(@RequestParam(required = true) Long promotionid){
     repository.deleteById(promotionid);
 
     return "Deleted";
+}
+
+@PutMapping("/promotion")
+@ResponseBody
+public Promotion  updatePromotion(@RequestParam(required = true) Long promotionid, @RequestBody Promotion newpromotion ){
+return repository.findById(promotionid)
+      .map(promotion -> {
+        promotion.setAisle(newpromotion.getAisle());
+        promotion.setShelf(newpromotion.getShelf());
+        promotion.setProductName(newpromotion.getProductName());
+        return repository.save(promotion);
+      })
+      .orElseGet(() -> {
+        newpromotion.setPromotionid(promotionid);
+        return repository.save(newpromotion);
+      });
+
+
 }
 
 
